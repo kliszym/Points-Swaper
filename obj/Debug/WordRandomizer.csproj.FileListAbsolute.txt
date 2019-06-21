@@ -1,0 +1,9 @@
+C:\Users\klisz\Documents\Visual Studio 2015\Projects\WordRandomizer\WordRandomizer\bin\Debug\WordRandomizer.exe.config
+C:\Users\klisz\Documents\Visual Studio 2015\Projects\WordRandomizer\WordRandomizer\bin\Debug\WordRandomizer.exe
+C:\Users\klisz\Documents\Visual Studio 2015\Projects\WordRandomizer\WordRandomizer\bin\Debug\WordRandomizer.pdb
+C:\Users\klisz\Documents\Visual Studio 2015\Projects\WordRandomizer\WordRandomizer\obj\Debug\WordRandomizer.csprojResolveAssemblyReference.cache
+C:\Users\klisz\Documents\Visual Studio 2015\Projects\WordRandomizer\WordRandomizer\obj\Debug\WordRandomizer.Form1.resources
+C:\Users\klisz\Documents\Visual Studio 2015\Projects\WordRandomizer\WordRandomizer\obj\Debug\WordRandomizer.Properties.Resources.resources
+C:\Users\klisz\Documents\Visual Studio 2015\Projects\WordRandomizer\WordRandomizer\obj\Debug\WordRandomizer.csproj.GenerateResource.Cache
+C:\Users\klisz\Documents\Visual Studio 2015\Projects\WordRandomizer\WordRandomizer\obj\Debug\WordRandomizer.exe
+C:\Users\klisz\Documents\Visual Studio 2015\Projects\WordRandomizer\WordRandomizer\obj\Debug\WordRandomizer.pdb
