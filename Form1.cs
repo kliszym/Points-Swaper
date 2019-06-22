@@ -19,6 +19,7 @@ namespace WordRandomizer
         public const int buffer_size = 100;
         string filePath = "";
         string previous_data = "";
+        BufferReader br;
 
         public Form1()
         {
@@ -66,13 +67,11 @@ namespace WordRandomizer
             if (!File.Exists(path)) return -1;
    //         int counter = 0;
 
-            XmlReaderSettings settings = new XmlReaderSettings();
-            settings.DtdProcessing = DtdProcessing.Parse;
             StreamReader sr = new StreamReader(path);
 
             StreamWriter sw = new StreamWriter("" + index + ".txt", true);
 
-            string line;
+            string line = "";
 
             while (sr.ReadBlock(buffer, 0, buffer_size) != 0)
             {
@@ -103,7 +102,8 @@ namespace WordRandomizer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            randomize();
+            //          randomize();
+            textBox2.Text = br.GetMarkUp();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -116,6 +116,7 @@ namespace WordRandomizer
                 try
                 {
                     filePath = dialog.FileName;
+                    br = new BufferReader(filePath);
                     textBox1.Text = filePath;
                 }
                 catch (Exception)
