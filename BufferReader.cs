@@ -26,6 +26,16 @@ namespace WordRandomizer
             sr = new StreamReader(fileName);
         }
 
+        private string CharToString(char[] array, int start, int count)
+        {
+            string ret = "";
+            for(int i = start; i < start + count; i++)
+            {
+                ret += array[i];
+            }
+            return ret;
+        }
+
         private int FindSign(char sign)
         {
             for( ; iterator < result; iterator++)
@@ -68,10 +78,7 @@ namespace WordRandomizer
             {
                 if(markUpStarted)
                 {
-                    //nie znaleziona końca znacznika, 
-                    //więc skopiowano znaki od początku znacznika do końca bufora
-                    string.Join("", buffer).CopyTo(markUpStart, buffer, 0, result - markUpStart);
-                    markUp += string.Join("", buffer);
+                    markUp += CharToString(buffer, markUpStart, result - markUpStart);
                     Read();
                     return false;
                 }
@@ -81,9 +88,7 @@ namespace WordRandomizer
                 if(FindEndMarkUp())
                 {
                     markUpStarted = false;
-                    string.Join("", buffer).CopyTo(markUpStart, buffer, 0, markUpEnd - markUpStart);
-                    buffer[markUpEnd + 1] = '\0';
-                    markUp += string.Join("", buffer);
+                    markUp += CharToString(buffer, markUpStart, markUpEnd - markUpStart + 1);
                     return true;
                 }
 
@@ -92,7 +97,11 @@ namespace WordRandomizer
             {
                 markUpStarted = true;
                 markUp = "";
-                while(!FindStartMarkUp())Read();
+                while (!FindStartMarkUp())
+                {
+                    Read();
+                    if (result == 0) break;
+                }
             }
             return false;
         }    
@@ -106,7 +115,7 @@ namespace WordRandomizer
 
         public string GetMarkUp()
         {
-            while (!FindMarkUp()) ;
+            while (!FindMarkUp())if(result == 0) return null;
             return markUp;
         }
     }

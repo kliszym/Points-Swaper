@@ -103,7 +103,8 @@ namespace WordRandomizer
         private void button1_Click(object sender, EventArgs e)
         {
             //          randomize();
-            textBox2.Text = br.GetMarkUp();
+            string result = br.GetMarkUp();
+            if (result != null) textBox2.Text = result;
         }
 
         private void button2_Click(object sender, EventArgs e)
