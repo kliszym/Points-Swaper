@@ -10,7 +10,6 @@ namespace WordRandomizer
     class BufferReader
     {
         StreamReader sr;
-        string fileName;
         const int bufferSize = 100;
         int result = 0;
         char[] buffer = new char[bufferSize];
@@ -24,6 +23,11 @@ namespace WordRandomizer
        public BufferReader(string fileName)
         {
             sr = new StreamReader(fileName);
+        }
+
+        public void Close()
+        {
+            sr.Close();
         }
 
         private string CharToString(char[] array, int start, int count)
@@ -82,6 +86,12 @@ namespace WordRandomizer
                     Read();
                     return false;
                 }
+                else
+                {
+                    data += CharToString(buffer, markUpEnd, result - markUpEnd);
+                    Read();
+                    return false;
+                }
             }
             if (markUpStarted)
             {
@@ -91,7 +101,6 @@ namespace WordRandomizer
                     markUp += CharToString(buffer, markUpStart, markUpEnd - markUpStart + 1);
                     return true;
                 }
-
             }
             else
             {
@@ -102,6 +111,7 @@ namespace WordRandomizer
                     Read();
                     if (result == 0) break;
                 }
+                data += CharToString(buffer, markUpEnd + 1, markUpStart - markUpEnd - 1);
             }
             return false;
         }    
@@ -113,10 +123,21 @@ namespace WordRandomizer
             markUpStart = 0;
         }
 
+        public bool GoNext()
+        {
+            data = "";
+            while (!FindMarkUp()) if (result == 0) return false;
+            return true;
+        }
+
         public string GetMarkUp()
         {
-            while (!FindMarkUp())if(result == 0) return null;
             return markUp;
+        }
+
+        public string GetData()
+        {
+            return data;
         }
     }
 }

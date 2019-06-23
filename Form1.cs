@@ -16,9 +16,8 @@ namespace WordRandomizer
 
     public partial class Form1 : Form
     {
-        public const int buffer_size = 100;
+        public const int buffer_size = 200;
         string filePath = "";
-        string previous_data = "";
         BufferReader br;
 
         public Form1()
@@ -26,85 +25,19 @@ namespace WordRandomizer
             InitializeComponent();
             this.MaximizeBox = false;
             this.Text = "Randomizer";
-        }
-
-        void read_buffer(StreamReader sr, char[] buffer)
-        {
-            sr.ReadBlock(buffer, 0, buffer_size);
-        }
-
-        bool find_pointer_start(char[] buffer, StreamWriter sw)
-        {
-            string buf = buffer.ToString();
-
-
-            int index = 0;
-            int saved_index = -1;
-            int start_markup = -1;
-
-            string subbuffer = previous_data + buf;
-            if (subbuffer.Contains("<w:p"))
-            {
-                index++;    
-            }
-            previous_data = buf.Substring(buf.Length - 4, 3);
-             
-
-
-            return true;
-        }
-
-        void find_pointer_end(char[] buffer)
-        {
-
-        }
-
-        private int unzip()
-        {
-            int index = 0;
-            char[] buffer = new char[buffer_size];
-            string path = textBox1.Text;
-            if (!File.Exists(path)) return -1;
-   //         int counter = 0;
-
-            StreamReader sr = new StreamReader(path);
-
-            StreamWriter sw = new StreamWriter("" + index + ".txt", true);
-
-            string line = "";
-
-            while (sr.ReadBlock(buffer, 0, buffer_size) != 0)
-            {
-                
-                sw.WriteLine(line);
-                sw.WriteLine("" + index);
-                //                sw.Write(xr)
-                //       xr.NodeType;
-                index++;
-            }
-
-            sr.Close();
-            sw.Close();
-
-            return index;
-        }
-
-        private void place_random()
-        {
-
-        }
-
-        private void randomize()
-        {
-            if(unzip() != null)place_random();
-
+            button1.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //          randomize();
-            string result = br.GetMarkUp();
-            if (result != null) textBox2.Text = result;
+            //zrobić klasę do zapisywania i zapisywać do kilku plików, 
+            //zacząć numerację w przypadku znalezienia "Akapitzlist"
+           //start, 0, 1...., koniec
+            if (br.GoNext())
+            {
+                textBox2.Text = br.GetMarkUp();
+                textBox3.Text = br.GetData();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -119,9 +52,11 @@ namespace WordRandomizer
                     filePath = dialog.FileName;
                     br = new BufferReader(filePath);
                     textBox1.Text = filePath;
+                    button1.Enabled = true;
                 }
                 catch (Exception)
                 {
+                    button1.Enabled = false;
                     MessageBox.Show("An Error Occures");
                 }
             }
