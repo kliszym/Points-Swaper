@@ -108,6 +108,7 @@ namespace WordRandomizer
             //part.EndPartition();
             matcher = new Matcher(part.counter, points, "document.xml");
             matcher.match();
+            part.EndPartition();
         }
 
         private void Form1_Load(object sender, EventArgs e)

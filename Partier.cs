@@ -11,7 +11,6 @@ namespace WordRandomizer
     {
         StreamWriter sw;
         string start = "start";
-        string end = "end";
         string part;
         public int counter { get; private set; } = -1;
 
@@ -50,11 +49,6 @@ namespace WordRandomizer
             StartTag();
         }
 
-        public void SetEnd()
-        {
-            part = end;
-        }
-
         public void Save(string buffer)
         {
             sw = new StreamWriter(part, true);
@@ -66,12 +60,10 @@ namespace WordRandomizer
         {
             if (File.Exists(start)) File.Delete(start);
 
-            for(int i = 0; i < counter; i++)
+            for(int i = 0; i <= counter; i++)
             {
                 if (File.Exists(i.ToString())) File.Delete(i.ToString());
             }
-
-            if (File.Exists(end)) File.Delete(end);
         }
     }
 }

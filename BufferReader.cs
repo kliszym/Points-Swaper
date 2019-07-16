@@ -113,11 +113,13 @@ namespace WordRandomizer
                     if (isFirst)
                     {
                         data += CharToString(buffer, markUpEnd + 1, result - markUpEnd - 1);
+                        markUpEnd = -1;
                         isFirst = false;
                     }
                     else
                     {
-                        data += CharToString(buffer, 0, result - markUpEnd - 1);
+                        data += CharToString(buffer, 0, result - 1);
+                        markUpEnd = -1;
                     }
 
                     Read();
