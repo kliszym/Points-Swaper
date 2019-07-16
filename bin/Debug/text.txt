@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="y
-es"?>
-<w:document xmlns:wpc="http://schemas.micro
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:document xmlns:wpc="http://schemas.micro

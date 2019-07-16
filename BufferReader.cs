@@ -10,13 +10,13 @@ namespace WordRandomizer
     class BufferReader
     {
         StreamReader sr;
-        const int bufferSize = 100;
+        const int bufferSize = 200;
         int result = 0;
         char[] buffer = new char[bufferSize];
         string markUp = "";
         string data = "";
         int markUpStart = 0;
-        int markUpEnd = 0;
+        int markUpEnd = -1;
         bool markUpStarted = false;
         int iterator = 0;
 
@@ -88,7 +88,7 @@ namespace WordRandomizer
                 }
                 else
                 {
-                    data += CharToString(buffer, markUpEnd, result - markUpEnd);
+                    data += CharToString(buffer, markUpEnd + 1, result - markUpEnd - 1);
                     Read();
                     return false;
                 }
@@ -106,8 +106,20 @@ namespace WordRandomizer
             {
                 markUpStarted = true;
                 markUp = "";
+
+                bool isFirst = true;
                 while (!FindStartMarkUp())
                 {
+                    if (isFirst)
+                    {
+                        data += CharToString(buffer, markUpEnd + 1, result - markUpEnd - 1);
+                        isFirst = false;
+                    }
+                    else
+                    {
+                        data += CharToString(buffer, 0, result - markUpEnd - 1);
+                    }
+
                     Read();
                     if (result == 0) break;
                 }
